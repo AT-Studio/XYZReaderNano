@@ -8,7 +8,7 @@ import static com.example.xyzreader.data.ItemsProvider.Tables;
 
 public class ItemsDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "xyzreader.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public ItemsDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -18,7 +18,7 @@ public class ItemsDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + Tables.ITEMS + " ("
                 + ItemsContract.ItemsColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ItemsContract.ItemsColumns.SERVER_ID + " TEXT,"
+                + ItemsContract.ItemsColumns.SERVER_ID + " INTEGER NOT NULL,"
                 + ItemsContract.ItemsColumns.TITLE + " TEXT NOT NULL,"
                 + ItemsContract.ItemsColumns.AUTHOR + " TEXT NOT NULL,"
                 + ItemsContract.ItemsColumns.BODY + " TEXT NOT NULL,"

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.xyzreader.ui.LicenseActivity"
+    tools:showIn="@layout/activity_license">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/butterKnifeWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/butterKnifeTitle"
+                style="@style/licenseTitle"
+                android:text="@string/butterKnife_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/butterKnifeLink"
+                style="@style/licenseLink"
+                android:text="@string/butterKnife_link"
+                app:layout_constraintTop_toBottomOf="@id/butterKnifeTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/butterKnifeLicense"
+                style="@style/licenseLicense"
+                android:text="@string/butterKnife_license"
+                app:layout_constraintTop_toBottomOf="@id/butterKnifeLink"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            style="@style/licenseDivider"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/okhttpWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/okhttpTitle"
+                style="@style/licenseTitle"
+                android:text="@string/okhttp_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/okhttpLink"
+                style="@style/licenseLink"
+                android:text="@string/okhttp_link"
+                app:layout_constraintTop_toBottomOf="@id/okhttpTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/okhttpLicense"
+                style="@style/licenseLicense"
+                android:text="@string/okhttp_license"
+                app:layout_constraintTop_toBottomOf="@id/okhttpLink"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            style="@style/licenseDivider"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/picassoWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/picassoTitle"
+                style="@style/licenseTitle"
+                android:text="@string/picasso_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/picassoLink"
+                style="@style/licenseLink"
+                android:text="@string/picasso_link"
+                app:layout_constraintTop_toBottomOf="@id/picassoTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/picassoLicense"
+                style="@style/licenseLicense"
+                android:text="@string/picasso_license"
+                app:layout_constraintTop_toBottomOf="@id/picassoLink"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            style="@style/licenseDivider"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/pageSplitterWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/pageSplitterTitle"
+                style="@style/licenseTitle"
+                android:text="@string/pageSplitter_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/pageSplitterLink"
+                style="@style/licenseLink"
+                android:text="@string/pageSplitter_link"
+                app:layout_constraintTop_toBottomOf="@id/pageSplitterTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            style="@style/licenseDivider"/>
+
+    </LinearLayout>
+
+</ScrollView>
