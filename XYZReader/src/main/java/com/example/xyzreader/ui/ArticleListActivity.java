@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.DrawerLayout;
@@ -81,6 +82,9 @@ public class ArticleListActivity extends AppCompatActivity implements
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
@@ -112,10 +116,9 @@ public class ArticleListActivity extends AppCompatActivity implements
             refresh();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -209,6 +212,15 @@ public class ArticleListActivity extends AppCompatActivity implements
             StaggeredGridLayoutManager sglm =
                     new StaggeredGridLayoutManager(numColumns, StaggeredGridLayoutManager.VERTICAL);
             mRecyclerView.setLayoutManager(sglm);
+
+            final Snackbar snackbar = Snackbar.make(drawerLayout, "There are " + cursor.getCount() + " stories!", 5000);
+            snackbar.setAction("DIMISS", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snackbar.dismiss();
+                }
+            });
+            snackbar.show();
         }
         else {
             adapter.updateAdapter(cursor);
@@ -257,7 +269,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 
                 int position = binarySearchArray(storyId, storyItems);
 
-                if (storyItems.get(position).storyId == storyId) {
+                if (position < storyItems.size() && storyItems.get(position).storyId == storyId) {
                     storyItems.get(position).DbId = DbId;
                 } else {
                     String title = cursor.getString(ArticleLoader.Query.TITLE);

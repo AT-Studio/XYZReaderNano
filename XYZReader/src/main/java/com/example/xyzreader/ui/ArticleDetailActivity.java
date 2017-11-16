@@ -1,5 +1,6 @@
 package com.example.xyzreader.ui;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.TextPaint;
 import android.text.format.DateUtils;
 import android.util.DisplayMetrics;
@@ -214,14 +216,7 @@ public class ArticleDetailActivity extends AppCompatActivity
                 float ratio = (float) poster.getHeight() / poster.getWidth();
                 int height = (int) (displayMetrics.widthPixels * ratio);
 
-                final CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
-                params.height = height + getStatusBarHeight();
-                appBarLayout.setLayoutParams(params);
-
-                FrameLayout.LayoutParams params1 = (FrameLayout.LayoutParams) storyThumbnail.getLayoutParams();
-                params1.height = height;
-                storyThumbnail.setLayoutParams(params1);
-                storyThumbnail.setImageBitmap(poster);
+                animateAppBar(height, poster);
 
             }
 
@@ -269,7 +264,7 @@ public class ArticleDetailActivity extends AppCompatActivity
                 TextPaint textPaint = new TextPaint();
                 textPaint.setTextSize(getResources().getDimension(R.dimen.story_text_height));
 
-                pageSplitter.append(body, textPaint);
+                pageSplitter.append(Html.fromHtml(body).toString(), textPaint);
 
                 TextPagerAdater adapter = new TextPagerAdater(getSupportFragmentManager(), pageSplitter.getPages());
 
@@ -290,6 +285,58 @@ public class ArticleDetailActivity extends AppCompatActivity
         };
 
         task.execute();
+    }
+
+    public void animateAppBar(final int finalHeight, Bitmap poster) {
+
+        storyThumbnail.setVisibility(View.INVISIBLE);
+        FrameLayout.LayoutParams params1 = (FrameLayout.LayoutParams) storyThumbnail.getLayoutParams();
+        params1.height = finalHeight;
+        storyThumbnail.setLayoutParams(params1);
+        storyThumbnail.setImageBitmap(poster);
+        fadeIn(storyThumbnail, 200);
+
+        final CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        ValueAnimator animator = ValueAnimator.ofInt(appBarLayout.getHeight(), finalHeight + getStatusBarHeight()).setDuration(400);
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                params.height = (int) valueAnimator.getAnimatedValue();
+                appBarLayout.setLayoutParams(params);
+            }
+        });
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+//                CollapsingToolbarLayout.LayoutParams params1 = (CollapsingToolbarLayout.LayoutParams) posterImageView.getLayoutParams();
+//                params1.height = finalHeight;
+//                posterImageView.setLayoutParams(params1);
+//                posterImageView.setImageBitmap(poster);
+//                pictureIsSet = true;
+//                if (databaseIsQueried) {
+//                    fadeIn(followWrapper, 200);
+//                }
+//                fadeIn(posterImageView, 200);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        animator.start();
+
     }
 
     @Override
@@ -321,6 +368,7 @@ public class ArticleDetailActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public class TextPagerAdater extends FragmentPagerAdapter {
 
